@@ -1,0 +1,106 @@
+- sql bảng m_risk_data_creation
+
+
+
+CREATE TABLE m_risk_data_creation (
+    id serial PRIMARY KEY,
+    name character varying(50),
+    is_deleted smallint,
+    created_at timestamp NOT NULL ,
+    updated_at timestamp NOT NULL 
+)
+
+
+
+
+- sql bảng m_risk_amount_category
+
+
+
+CREATE TABLE m_risk_amount_category (
+    id serial PRIMARY KEY,
+    name character varying(50),
+    risk_level character varying(50),
+    is_deleted smallint,
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL
+);
+
+
+
+
+- sql bảng m_risk_payment_method
+
+
+
+
+CREATE TABLE m_risk_payment_method (
+    id serial PRIMARY KEY,
+    name character varying(50),
+    is_deleted smallint,
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL
+);
+
+
+
+- sql bảng job_risks
+
+
+
+CREATE TABLE job_risks (
+    id serial PRIMARY KEY,
+    job_id int,
+    risk_level character varying(100),
+    attachment1 character varying(512),
+    manual_file_path1 character varying(1024),
+    attachment2 character varying(512),
+    manual_file_path2 character varying(1024),
+    payment_method_id int ,
+    amount_category_id int ,
+    method_data_creation_id int ,
+    is_deleted smallint,
+    created_at timestamp,
+    updated_at timestamp,
+    created_user character varying(100),
+    updated_user character varying(100),
+    version int
+);
+
+
+
+
+INSERT INTO m_risk_data_creation (name, is_deleted, created_at, updated_at)
+VALUES
+    ('「人」', 0, current_timestamp, current_timestamp),
+    ('「システム」', 0, current_timestamp, current_timestamp),
+    ('「人およびシステム」', 0, current_timestamp, current_timestamp),
+    ('「社外（従量）」', 0, current_timestamp, current_timestamp),
+
+
+
+INSERT INTO m_risk_payment_method (name, is_deleted, created_at, updated_at)
+VALUES
+    ('「支払」', 0, current_timestamp, current_timestamp),
+    ('「請求」', 0, current_timestamp, current_timestamp)
+
+
+
+
+
+INSERT INTO m_risk_amount_category (name, risk_level, is_deleted, created_at, updated_at)
+VALUES
+    ('500万以上', 'S', 0, current_timestamp, current_timestamp),
+    ('50万以上', 'A', 0, current_timestamp, current_timestamp),
+    ('50万未満', 'B', 0, current_timestamp, current_timestamp)
+
+
+
+
+
+
+
+
+
+
+
