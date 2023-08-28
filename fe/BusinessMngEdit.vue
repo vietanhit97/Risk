@@ -951,30 +951,7 @@ export default {
       return FnCommon.getFileNameFromPath(this.formData.jobRisk.attachment2);
     },
     disabledPaymentMethod() {
-      if (this.formData.jobRisk) {
-        return !this.formData.jobRisk.paymentMethodId;
-      }
-      return true;
-    },
-    manualFilePath1Value: {
-      get(){
-        return this.formData.jobRisk ? this.formData.jobRisk.manualFilePath1 : null;
-      },
-      set(newValue) {
-        if (this.formData.jobRisk) {
-          this.formData.jobRisk.manualFilePath1 = newValue;
-        }
-      }
-    },
-    manualFilePath2Value: {
-      get(){
-        return this.formData.jobRisk ? this.formData.jobRisk.manualFilePath2 : null;
-      },
-      set(newValue) {
-        if (this.formData.jobRisk) {
-          this.formData.jobRisk.manualFilePath2 = newValue;
-        }
-      }
+      return !this.formData.jobRisk.paymentMethodId; 
     },
   },
   methods: {
