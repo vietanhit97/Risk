@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class JobRiskView {
+    public Integer id;
     public String riskLevelJob;
     public String attachment1;
     public String attachment2;

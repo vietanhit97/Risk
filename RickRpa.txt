@@ -4,10 +4,10 @@
 
 CREATE TABLE m_risk_data_creation (
     id serial PRIMARY KEY,
-    name character varying(50),
+    name character varying(200),
     is_deleted smallint,
-    created_at timestamp NOT NULL ,
-    updated_at timestamp NOT NULL 
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL,
 )
 
 
@@ -19,11 +19,11 @@ CREATE TABLE m_risk_data_creation (
 
 CREATE TABLE m_risk_amount_category (
     id serial PRIMARY KEY,
-    name character varying(50),
-    risk_level character varying(50),
+    name character varying(200),
+    risk_level character varying(200),
     is_deleted smallint,
     created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL
+    updated_at timestamp NOT NULL,
 );
 
 
@@ -36,10 +36,10 @@ CREATE TABLE m_risk_amount_category (
 
 CREATE TABLE m_risk_payment_method (
     id serial PRIMARY KEY,
-    name character varying(50),
+    name character varying(200),
     is_deleted smallint,
     created_at timestamp NOT NULL,
-    updated_at timestamp NOT NULL
+    updated_at timestamp NOT NULL,
 );
 
 
@@ -76,7 +76,7 @@ VALUES
     ('「システム」', 0, current_timestamp, current_timestamp),
     ('「人およびシステム」', 0, current_timestamp, current_timestamp),
     ('「社外（従量）」', 0, current_timestamp, current_timestamp),
-
+    ('「社外（固定」）」', 0, current_timestamp, current_timestamp),
 
 
 INSERT INTO m_risk_payment_method (name, is_deleted, created_at, updated_at)

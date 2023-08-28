@@ -1048,90 +1048,157 @@ public class JobService {
     }
 
     // ============== job_risk
-    
-    if (dto.getJobRisk().getPaymentMethodId() != null) {
-      if (Objects.nonNull(job.getJobRisk().getMRiskPaymentMethod())) {
-        if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskPaymentMethod().getId()) {
-          updateRpaRiskFlg = true;
-        }
-      } else {
-        updateRpaRiskFlg = true;
-      }
-    } else {
-      if (Objects.nonNull(job.getJobRisk().getMRiskPaymentMethod())) {
-        updateRpaRelatedFlg = true;
-      }
-    }
-    if (dto.getJobRisk().getAmountCategoryId() != null) {
-      if (Objects.nonNull(job.getJobRisk().getMRiskAmountCategory())) {
-        if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskAmountCategory().getId()) {
-          updateRpaRiskFlg = true;
-        }
-      } else {
-        updateRpaRiskFlg = true;
-      }
-    } else {
-      if (Objects.nonNull(job.getJobRisk().getMRiskAmountCategory())) {
-        updateRpaRelatedFlg = true;
-      }
-    }
-    if (dto.getJobRisk().getDataCreationId() != null) {
-      if (Objects.nonNull(job.getJobRisk().getMRiskDataCreation())) {
-        if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskDataCreation().getId()) {
-          updateRpaRiskFlg = true;
-        }
-      } else {
-        updateRpaRiskFlg = true;
-      }
-    } else {
-      if (Objects.nonNull(job.getJobRisk().getMRiskDataCreation())) {
-        updateRpaRelatedFlg = true;
-      }
-    }
 
-    JobRisk jobRisks =
-        jobRiskRepository
-            .findById(job.getJobRisk().getId())
-            .orElseThrow(
-                () -> new ExceptionRpa(HttpStatus.NOT_FOUND, RpaMessage.JOB_RISK_NOT_FOUND, id));
-
-    if (Objects.nonNull(dto.getJobRisk().getPaymentMethodId())) {
-      MRiskPaymentMethod mRiskPaymentMethod = paymentMethodRepository
+    if(Objects.nonNull(job.getJobRisk()) && Objects.nonNull(job.getJobRisk().getId())){
+      if (dto.getJobRisk().getPaymentMethodId() != null) {
+        if (Objects.nonNull(job.getJobRisk().getMRiskPaymentMethod())) {
+          if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskPaymentMethod().getId()) {
+            updateRpaRiskFlg = true;
+          }
+        } else {
+          updateRpaRiskFlg = true;
+        }
+      } else {
+        if (Objects.nonNull(job.getJobRisk().getMRiskPaymentMethod())) {
+          updateRpaRelatedFlg = true;
+        }
+      }
+      if (dto.getJobRisk().getAmountCategoryId() != null) {
+        if (Objects.nonNull(job.getJobRisk().getMRiskAmountCategory())) {
+          if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskAmountCategory().getId()) {
+            updateRpaRiskFlg = true;
+          }
+        } else {
+          updateRpaRiskFlg = true;
+        }
+      } else {
+        if (Objects.nonNull(job.getJobRisk().getMRiskAmountCategory())) {
+          updateRpaRelatedFlg = true;
+        }
+      }
+      if (dto.getJobRisk().getDataCreationId() != null) {
+        if (Objects.nonNull(job.getJobRisk().getMRiskDataCreation())) {
+          if (dto.getJobRisk().getPaymentMethodId() != job.getJobRisk().getMRiskDataCreation().getId()) {
+            updateRpaRiskFlg = true;
+          }
+        } else {
+          updateRpaRiskFlg = true;
+        }
+      } else {
+        if (Objects.nonNull(job.getJobRisk().getMRiskDataCreation())) {
+          updateRpaRelatedFlg = true;
+        }
+      }
+      JobRisk jobRisks = jobRiskRepository
+          .findById(job.getJobRisk().getId())
+          .orElseThrow(
+              () -> new ExceptionRpa(HttpStatus.NOT_FOUND, RpaMessage.JOB_RISK_NOT_FOUND, id));
+      if (Objects.nonNull(dto.getJobRisk().getPaymentMethodId())) {
+        MRiskPaymentMethod mRiskPaymentMethod = paymentMethodRepository
             .findById(dto.getJobRisk().getPaymentMethodId())
-              .orElseThrow(
-                  () -> new ExceptionRpa(
-                      HttpStatus.NOT_FOUND,
-                      RpaMessage.PAYMENTMETHOD_NOT_FOUND,
-                      dto.getJobRisk().getPaymentMethodId()));
-      jobRisks.setMRiskPaymentMethod(mRiskPaymentMethod);
-    } else {
-      jobRisks.setMRiskPaymentMethod(null);
-    }
-    if (Objects.nonNull(dto.getJobRisk().getAmountCategoryId())) {
-      MRiskAmountCategory mRiskAmountCategory = amountCategoryRepository
-          .findById(dto.getJobRisk().getAmountCategoryId())
-          .orElseThrow(
-              () -> new ExceptionRpa(
-                  HttpStatus.NOT_FOUND,
-                  RpaMessage.AMOUNTCATEGORY_NOT_FOUND,
-                  dto.getJobRisk().getAmountCategoryId()));
-      jobRisks.setMRiskAmountCategory(mRiskAmountCategory);
-    } else {
-      jobRisks.setMRiskAmountCategory(null);
-    }
-    if (Objects.nonNull(dto.getJobRisk().getDataCreationId())) {
-      MRiskDataCreation mRiskDataCreation = dataCreationRepository
-          .findById(dto.getJobRisk().getDataCreationId())
-          .orElseThrow(
-              () -> new ExceptionRpa(
-                  HttpStatus.NOT_FOUND,
-                  RpaMessage.DATACREATION_NOT_FOUND,
-                  dto.getJobRisk().getDataCreationId()));
-      jobRisks.setMRiskDataCreation(mRiskDataCreation);
-    } else {
-      jobRisks.setMRiskDataCreation(null);
-    }
-
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.PAYMENTMETHOD_NOT_FOUND,
+                    dto.getJobRisk().getPaymentMethodId()));
+        jobRisks.setMRiskPaymentMethod(mRiskPaymentMethod);
+      } else {
+        jobRisks.setMRiskPaymentMethod(null);
+      }
+      if (Objects.nonNull(dto.getJobRisk().getAmountCategoryId())) {
+        MRiskAmountCategory mRiskAmountCategory = amountCategoryRepository
+            .findById(dto.getJobRisk().getAmountCategoryId())
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.AMOUNTCATEGORY_NOT_FOUND,
+                    dto.getJobRisk().getAmountCategoryId()));
+        jobRisks.setMRiskAmountCategory(mRiskAmountCategory);
+      } else {
+        jobRisks.setMRiskAmountCategory(null);
+      }
+      if (Objects.nonNull(dto.getJobRisk().getDataCreationId())) {
+        MRiskDataCreation mRiskDataCreation = dataCreationRepository
+            .findById(dto.getJobRisk().getDataCreationId())
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.DATACREATION_NOT_FOUND,
+                    dto.getJobRisk().getDataCreationId()));
+        jobRisks.setMRiskDataCreation(mRiskDataCreation);
+      } else {
+        jobRisks.setMRiskDataCreation(null);
+      }
+      jobRisks.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
+      jobRisks.setAttachment1(dto.getJobRisk().getAttachment1());
+      jobRisks.setAttachment2(dto.getJobRisk().getAttachment2());
+      jobRisks.setManualFilePath1(dto.getJobRisk().getManualFilePath1());
+      jobRisks.setManualFilePath2(dto.getJobRisk().getManualFilePath2());
+      if (dto.getJobRisk().getRiskLevelJob() != job.getJobRisk().getRiskLevelJob()
+          || !Objects.equals(dto.getJobRisk().getAttachment1(), job.getJobRisk().getAttachment1())
+          || !Objects.equals(dto.getJobRisk().getAttachment2(), job.getJobRisk().getAttachment2())
+          || !Objects.equals(dto.getJobRisk().getManualFilePath1(), job.getJobRisk().getManualFilePath1())
+          || !Objects.equals(dto.getJobRisk().getManualFilePath2(), job.getJobRisk().getManualFilePath2())) {
+        updateRpaRiskFlg = true;
+      }
+      if (dto.getJobRisk().getPathAttachment1Del() != null) {
+        String pathAttachment1Del = dto.getJobRisk().getPathAttachment1Del();
+        String[] split = pathAttachment1Del.split("/");
+        String subFolderAttachment1 = split[0];
+        String fileNameAttachment1 = split[1];
+        fileStorageService.deleteFile("rpa_spec", subFolderAttachment1, fileNameAttachment1, 3);
+      }
+      if (dto.getJobRisk().getPathAttachment2Del() != null) {
+        String pathAttachment2Del = dto.getJobRisk().getPathAttachment2Del();
+        String[] split = pathAttachment2Del.split("/");
+        String subFolderAttachment2 = split[0];
+        String fileNameAttachment2 = split[1];
+        fileStorageService.deleteFile("rpa_spec", subFolderAttachment2, fileNameAttachment2, 4);
+      }
+      if (updateRpaRiskFlg == true) {
+        jobRisks.setUpdatedUser(updatedUser);
+      }
+      jobRiskRepository.save(jobRisks);
+    }else{
+      JobRisk jobRisk = new JobRisk();
+      jobRisk.setJob(job);
+      FnCommon.coppyNonNullProperties(jobRisk, dto.jobRisk);
+      if (Objects.nonNull(dto.getJobRisk().getAmountCategoryId())) {
+        MRiskAmountCategory amountCategory = amountCategoryRepository
+            .findById(dto.getJobRisk().getAmountCategoryId())
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.AMOUNTCATEGORY_NOT_FOUND,
+                    dto.getJobRelated().getSubPerson3()));
+        jobRisk.setMRiskAmountCategory(amountCategory);
+      }
+      if (Objects.nonNull(dto.getJobRisk().getDataCreationId())) {
+        MRiskDataCreation dataCreation = dataCreationRepository
+            .findById(dto.getJobRisk().getDataCreationId())
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.DATACREATION_NOT_FOUND,
+                    dto.getJobRelated().getSubPerson3()));
+        jobRisk.setMRiskDataCreation(dataCreation);
+      }
+      if (Objects.nonNull(dto.getJobRisk().getPaymentMethodId())) {
+        MRiskPaymentMethod paymentMethod = paymentMethodRepository
+            .findById(dto.getJobRisk().getPaymentMethodId())
+            .orElseThrow(
+                () -> new ExceptionRpa(
+                    HttpStatus.NOT_FOUND,
+                    RpaMessage.PAYMENTMETHOD_NOT_FOUND,
+                    dto.getJobRelated().getSubPerson3()));
+        jobRisk.setMRiskPaymentMethod(paymentMethod);
+      }
+      jobRisk.setCreatedUser(updatedUser);
+      jobRisk.setUpdatedUser(updatedUser);
+      jobRisk.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
+      jobRiskRepository.save(jobRisk);
+    }          
+  
     // update all 
 
     if(dto.getCategory() != job.getCategory()
@@ -1170,15 +1237,6 @@ public class JobService {
       updateRpaRelatedFlg = true;
     }
 
-    // JobRisk
-    if (dto.getJobRisk().getRiskLevelJob() != job.getJobRisk().getRiskLevelJob()
-        || !Objects.equals(dto.getJobRisk().getAttachment1(), job.getJobRisk().getAttachment1())
-        || !Objects.equals(dto.getJobRisk().getAttachment2(), job.getJobRisk().getAttachment2())
-        || !Objects.equals(dto.getJobRisk().getManualFilePath1(), job.getJobRisk().getManualFilePath1())
-        || !Objects.equals(dto.getJobRisk().getManualFilePath2(), job.getJobRisk().getManualFilePath2())) {
-      updateRpaRiskFlg = true;
-    }
-
     //JobAnalyzeTime
     if(dto.getJobAnalyzeTime().getWorkingMonths() != job.getJobAnalyzeTime().getWorkingMonths()){
       updateRpaAnalyzeFlg = true;
@@ -1201,9 +1259,7 @@ public class JobService {
     if(updateRpaRelatedFlg == true) {
       jobRelated.setUpdatedUser(updatedUser);
     }
-    if(updateRpaRiskFlg == true){
-      jobRisks.setUpdatedUser(updatedUser);
-    }
+    
     //update data
 
     //job analyze
@@ -1219,14 +1275,7 @@ public class JobService {
     jobRelated.setAttachment2(dto.getJobRelated().getAttachment2());
     jobRelated.setManualFilePath(dto.getJobRelated().getManualFilePath());
     jobRelated.setFormat(dto.getJobRelated().getFormat());
-
-    // job risk
-    jobRisks.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
-    jobRisks.setAttachment1(dto.getJobRisk().getAttachment1());
-    jobRisks.setAttachment2(dto.getJobRisk().getAttachment2());
-    jobRisks.setManualFilePath1(dto.getJobRisk().getManualFilePath1());
-    jobRisks.setManualFilePath2(dto.getJobRisk().getManualFilePath2());
-
+    
     job.setDescription(dto.getDescription());
     job.setName(dto.getName());
 
@@ -1295,21 +1344,6 @@ public class JobService {
       fileStorageService.deleteFile("rpa_spec", subFolderAttachment2, fileNameAttachment2, 2);
     }
 
-      if(dto.getJobRisk().getPathAttachment1Del() != null){
-      String pathAttachment1Del = dto.getJobRisk().getPathAttachment1Del();
-      String[] split = pathAttachment1Del.split("/");
-      String subFolderAttachment1 = split[0];
-      String fileNameAttachment1 = split[1];
-      fileStorageService.deleteFile("rpa_spec", subFolderAttachment1, fileNameAttachment1, 3);
-    }
-    if(dto.getJobRisk().getPathAttachment2Del() != null){
-      String pathAttachment2Del = dto.getJobRisk().getPathAttachment2Del();
-      String[] split = pathAttachment2Del.split("/");
-      String subFolderAttachment2 = split[0];
-      String fileNameAttachment2 = split[1];
-      fileStorageService.deleteFile("rpa_spec", subFolderAttachment2, fileNameAttachment2, 4);
-    }
-
     if(updateJobFlg == true) {
       job.setUpdatedUser(updatedUser);
       job.setUpdatedAt(updateAt);
@@ -1319,7 +1353,6 @@ public class JobService {
     jobRpaInfoRepository.save(jobRpaInfo);
     jobAnalyzeTimeRepository.save(jobAnalyzeTime);
     jobRelatedRepository.save(jobRelated);
-    jobRiskRepository.save(jobRisks);
     // } catch (Exception ex) {
     // LOG.info(String.format("Update job Exception: %s", ex));
     // }
