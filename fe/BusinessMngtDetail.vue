@@ -217,7 +217,7 @@
                     <tr>
                       <td class="job-risk">リスクレベル</td>
                       <td class="text-left">
-                        {{ formData.jobRisk.riskLevelJob }}
+                        {{ formData.jobRisk.riskLevel }}
                       </td>
                     </tr>
                     <tr>
@@ -392,7 +392,7 @@ export default {
         mainPersonNumber: null,
         jobRisk:{
           attachment1: null, attachment2: null, manualFilePath1: null, manualFilePath2: null,
-          riskLevelJob: null, amountCategoryName: null, paymentMethodName: null, dataCreationName: null
+          riskLevel: null, amountCategoryName: null, paymentMethodName: null, dataCreationName: null
         },
         jobRelated: {
           attachment1: null, attachment2: null, difficulty: null, manual: null, format: null, personalized: null,
@@ -500,7 +500,7 @@ export default {
         this.formData.updateUser = res?.updatedUser;
         if (!res?.jobRisk) {
           res.jobRisk = {
-            riskLevelJob: null,
+            riskLevel: null,
             attachment1: null,
             attachment2: null,
             mriskAmountCategory: { amountCategoryName: null },
@@ -511,7 +511,7 @@ export default {
         if (!this.formData.jobRisk) {
           this.formData.jobRisk = {};
         }
-        this.formData.jobRisk.riskLevelJob = res?.jobRisk?.riskLevelJob;
+        this.formData.jobRisk.riskLevel = res?.jobRisk?.riskLevel;
         this.formData.jobRisk.attachment1 = res?.jobRisk?.attachment1;
         this.formData.jobRisk.attachment2 = res?.jobRisk?.attachment2;
         this.formData.jobRisk.amountCategoryName= res?.jobRisk?.mriskAmountCategory?.amountCategoryName;

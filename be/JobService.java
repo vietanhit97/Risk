@@ -497,7 +497,7 @@ public class JobService {
     if (jobRisks != null) {
       jobRisks.setCreatedUser(createUser);
       jobRisks.setUpdatedUser(createUser);
-      jobRisks.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
+      jobRisks.setRiskLevel(dto.getJobRisk().getRiskLevel());
     }
 
     jobRpaInfoRepository.save(jobRpaInfo);
@@ -1129,12 +1129,12 @@ public class JobService {
       } else {
         jobRisks.setMRiskDataCreation(null);
       }
-      jobRisks.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
+      jobRisks.setRiskLevel(dto.getJobRisk().getRiskLevel());
       jobRisks.setAttachment1(dto.getJobRisk().getAttachment1());
       jobRisks.setAttachment2(dto.getJobRisk().getAttachment2());
       jobRisks.setManualFilePath1(dto.getJobRisk().getManualFilePath1());
       jobRisks.setManualFilePath2(dto.getJobRisk().getManualFilePath2());
-      if (dto.getJobRisk().getRiskLevelJob() != job.getJobRisk().getRiskLevelJob()
+      if (dto.getJobRisk().getRiskLevel() != job.getJobRisk().getRiskLevel()
           || !Objects.equals(dto.getJobRisk().getAttachment1(), job.getJobRisk().getAttachment1())
           || !Objects.equals(dto.getJobRisk().getAttachment2(), job.getJobRisk().getAttachment2())
           || !Objects.equals(dto.getJobRisk().getManualFilePath1(), job.getJobRisk().getManualFilePath1())
@@ -1195,7 +1195,7 @@ public class JobService {
       }
       jobRisk.setCreatedUser(updatedUser);
       jobRisk.setUpdatedUser(updatedUser);
-      jobRisk.setRiskLevelJob(dto.getJobRisk().getRiskLevelJob());
+      jobRisk.setRiskLevel(dto.getJobRisk().getRiskLevel());
       jobRiskRepository.save(jobRisk);
     }          
   

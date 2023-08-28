@@ -49,7 +49,7 @@ public class JobRisk {
     private Integer id;
 
     @Column(name = "risk_level") 
-    private String riskLevelJob;
+    private String riskLevel;
 
     @Column(name = "attachment1")
     private String attachment1;

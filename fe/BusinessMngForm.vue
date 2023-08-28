@@ -782,7 +782,7 @@ export default {
         status: 1,
         jobRisk:{
           attachment1: null, attachment2: null, manualFilePath1: null, manualFilePath2: null,
-          riskLevelJob: null, amountCategoryId: null, paymentMethodId: null, dataCreationId: null
+          riskLevel: null, amountCategoryId: null, paymentMethodId: null, dataCreationId: null
         },
         jobRelated: {
           attachment1: null, attachment2: null, difficulty: null, manual: null, format: null, personalized: null,
@@ -905,7 +905,7 @@ export default {
       return this.memo.departments?.find(e => e.id == this.formData.department)?.number;
     },
     risklevelNo() {
-      this.formData.jobRisk.riskLevelJob = this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
+      this.formData.jobRisk.riskLevel = this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
       return this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
     },
     jobYearlyTime() {
@@ -1118,7 +1118,7 @@ export default {
     resetFormValues() {
       this.formData.jobRisk.manualFilePath1 = null;
       this.formData.jobRisk.manualFilePath2 = null;
-      this.formData.jobRisk.riskLevelJob = null;
+      this.formData.jobRisk.riskLevel = null;
       this.formData.jobRisk.dataCreationId = null;
       this.formData.jobRisk.amountCategoryId = null;
       this.formData.jobRisk.attachment1 = null;

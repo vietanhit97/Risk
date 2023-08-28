@@ -758,7 +758,7 @@ export default {
         status: 1,
         jobRisk:{
           attachment1: null, attachment2: null, manualFilePath1: null, manualFilePath2: null,
-          riskLevelJob: null, amountCategoryId: null, paymentMethodId: null, dataCreationId: null,
+          riskLevel: null, amountCategoryId: null, paymentMethodId: null, dataCreationId: null,
           pathAttachment1Del: null,pathAttachment2Del: null,
         },
         jobRelated: {
@@ -893,7 +893,7 @@ export default {
       this.formData.jobRelated.subPerson3 = res?.jobRelated?.subPerson3?.id;
       if (!res?.jobRisk) {
         res.jobRisk = {
-          riskLevelJob: null,
+          riskLevel: null,
           attachment1: null,
           attachment2: null,
           mriskAmountCategory: { amountCategoryName: null },
@@ -907,7 +907,7 @@ export default {
       this.formData.jobRisk.amountCategoryId = res?.jobRisk?.mriskAmountCategory?.id;
       this.formData.jobRisk.dataCreationId = res?.jobRisk?.mriskDataCreation?.id;
       this.formData.jobRisk.paymentMethodId = res.jobRisk.mriskPaymentMethod.id;
-      this.formData.jobRisk.riskLevelJob = res?.jobRisk?.mriskAmountCategory?.riskLevel;
+      this.formData.jobRisk.riskLevel = res?.jobRisk?.mriskAmountCategory?.riskLevel;
       if (res?.ledgersLink?.id) {
         RequestUtil.get(RPAApi.DETAIL_LEDGERS_BY_LEDGER_LINK(res?.ledgersLink.id)).then(resLedger => {
           if (resLedger.status === 200) {
@@ -922,7 +922,7 @@ export default {
       return this.memo.departments?.find(e => e.id == this.formData.department)?.number;
     },
     risklevelNo() {
-      this.formData.jobRisk.riskLevelJob = this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
+      this.formData.jobRisk.riskLevel = this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
       return this.memo.amount_categories?.find(e => e.id == this.formData.jobRisk.amountCategoryId)?.riskLevel;
     },
     jobYearlyTime() {
@@ -1156,7 +1156,7 @@ export default {
     resetFormValues() {
       this.formData.jobRisk.manualFilePath1 = null;
       this.formData.jobRisk.manualFilePath2 = null;
-      this.formData.jobRisk.riskLevelJob = null;
+      this.formData.jobRisk.riskLevel = null;
       this.formData.jobRisk.dataCreationId = null;
       this.formData.jobRisk.amountCategoryId = null;
       this.formData.jobRisk.attachment1 = null ;
